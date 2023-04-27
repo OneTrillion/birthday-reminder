@@ -1,3 +1,25 @@
-.ant-picker-calendar-mode-switch{
+.ant-picker-calendar-mode-switch {
     display: none;
+}
+
+.ant-float-btn-body {
+    background-color: green !important;
+}
+
+.ant-float-btn-body > div {
+    width: 50px;
+    height: 50px;
+}
+
+.ant-float-btn-body > div > div {
+    width: 50px;
+    height: 50px;
+}
+
+.ant-float-btn-body > div > div > span {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

@@ -1,16 +1,8 @@
-import {
-    Button,
-    Modal,
-    Form,
-    Input,
-    Calendar,
-    Upload,
-    theme,
-} from "antd";
+import { Button, Modal, Form, Input, Calendar, Upload, theme } from "antd";
 import { useState } from "react";
 import { FloatButton } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
-import "./FormModal.css"
+import "./FormModal.css";
 
 const onPanelChange = (value, mode) => {
     console.log(value.format("YYYY-MM-DD"), mode);
@@ -22,18 +14,16 @@ const FormModal = () => {
     const showModal = () => {
         setOpen(true);
     };
-    const handleOk = () => {
-        setConfirmLoading(true);
-        setTimeout(() => {
-            setOpen(false);
-            setConfirmLoading(false);
-        }, 2000);
-    };
     const handleCancel = () => {
         console.log("Clicked cancel button");
         setOpen(false);
     };
     const onFinish = (values) => {
+        setConfirmLoading(true);
+        setTimeout(() => {
+            setOpen(false);
+            setConfirmLoading(false);
+        }, 2000);
         console.log("Success:", values);
     };
     const onFinishFailed = (errorInfo) => {
@@ -45,18 +35,16 @@ const FormModal = () => {
         }
         return e?.fileList;
     };
-    const { token } = theme.useToken();
-    const wrapperStyle = {
-        width: 300,
-        border: `1px solid ${token.colorBorderSecondary}`,
-        borderRadius: token.borderRadiusLG,
-    };
     return (
         <>
             <FloatButton
-                icon={<PlusOutlined />}
-                type="primary"
+                icon={
+                    <PlusOutlined
+                        style={{ color: "white", fontSize: "40px" }}
+                    />
+                }
                 style={{
+                    color: "green",
                     right: 24,
                     width: "100px",
                     height: "100px",
@@ -68,10 +56,10 @@ const FormModal = () => {
             <Modal
                 title="Add new birthday"
                 open={open}
-                onOk={handleOk}
+                onOk={onFinish}
                 onCancel={handleCancel}
                 closable={false}
-        centered={true}
+                centered={true}
                 footer={[
                     <Button key="back" onClick={handleCancel}>
                         Cancel
@@ -80,7 +68,7 @@ const FormModal = () => {
                         key="submit"
                         type="primary"
                         loading={confirmLoading}
-                        onClick={handleOk}
+                        onClick={onFinish}
                     >
                         Add
                     </Button>,
@@ -104,9 +92,7 @@ const FormModal = () => {
                     onFinishFailed={onFinishFailed}
                     autoComplete="off"
                 >
-                    <Form.Item
-                        label="Name"
-                    >
+                    <Form.Item label="Name">
                         <Input />
                     </Form.Item>
 
@@ -137,13 +123,6 @@ const FormModal = () => {
                             </div>
                         </Upload>
                     </Form.Item>
-
-                    <Form.Item
-                        wrapperCol={{
-                            offset: 8,
-                            span: 16,
-                        }}
-                    ></Form.Item>
                 </Form>
             </Modal>
         </>
