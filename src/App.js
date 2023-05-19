@@ -1,36 +1,10 @@
 import BirthdayCard from "./components/BirthdayCard.js";
 import FormModal from "./components/FormModal.js";
-import balloons from "./assets/balloons.jpg";
-import { atom, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
+import { birthdaysState } from "./recoil/atom/bithdayAtom"
+import { Row } from "antd";
 
 const App = () => {
-    const birthdaysState = atom({
-        key: "birthdaysState",
-        default: [
-            {
-                id: "1",
-                name: "Bob",
-                age: 34,
-                date: "30 Feb",
-                picture: balloons,
-            },
-            {
-                id: "2",
-                name: "Elise",
-                age: 25,
-                date: "69 Jun",
-                picture: balloons,
-            },
-            {
-                id: "3",
-                name: "Rick",
-                age: 48,
-                date: "3 Dec",
-                picture: balloons,
-            },
-        ],
-    });
-
     const birthdays = useRecoilValue(birthdaysState);
 
     return (
@@ -38,21 +12,23 @@ const App = () => {
             <div
                 style={{
                     backgroundColor: "green",
-                    padding: "10px 0px 10px 0px",
+                    padding: "20px 15px 20px 15px",
                     marginBottom: "20px",
                     filter: "drop-shadow(5px 5px 10px gray)",
                 }}
             >
-                <h1
-                    style={{
-                        color: "white",
-                        textAlign: "center",
-                        fontSize: "40px",
-                        margin: "0",
-                    }}
-                >
-                    Birthday Reminder
-                </h1>
+                <Row justify={"space-between"}>
+                    <h1
+                        style={{
+                            color: "white",
+                            fontSize: "35px",
+                            margin: "0",
+                        }}
+                    >
+                        Birthday Reminder
+                    </h1>
+                    <FormModal />
+                </Row>
             </div>
             {birthdays.map((birthday) => {
                 return (
@@ -65,7 +41,6 @@ const App = () => {
                     />
                 );
             })}
-            <FormModal />
         </div>
     );
 };
