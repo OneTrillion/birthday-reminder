@@ -32,16 +32,12 @@ const FormModal = () => {
         }, 1000);
 
         const age = calculateAge(formDate);
-        const monthName = formDate.$d.toLocaleString("en-US", {
-            month: "long",
-        });
-        const birhDate = formDate.$d.getDate() + " " + monthName;
 
         const birthday = {
             id: uuid(),
             name: values.name,
             age: age,
-            date: birhDate,
+            date: formDate.$d,
             //TODO: Add real photo
             picture: balloons,
         };

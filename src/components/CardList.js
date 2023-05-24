@@ -9,6 +9,13 @@ const CardList = () => {
     const containerRef = useRef(null);
     const prevScrollTopRef = useRef(0);
 
+    const genBirthDate = (cardDate) => {
+        const monthName = cardDate.toLocaleString("en-US", {
+            month: "long",
+        });
+        return cardDate.getDate() + " " + monthName;
+    }
+
     useEffect(() => {
         const container = containerRef.current;
         const cardCount = cards.length;
@@ -65,7 +72,7 @@ const CardList = () => {
                     key={card.id}
                     name={card.name}
                     age={card.age}
-                    date={card.date}
+                    date={genBirthDate(card.date)}
                     picture={card.picture}
                     className="birthday-card"
                 />
