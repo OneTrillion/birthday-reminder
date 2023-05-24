@@ -14,11 +14,38 @@ const CardList = () => {
             month: "long",
         });
         return cardDate.getDate() + " " + monthName;
-    }
+    };
+
+    const sortCardsByDate = (c) => {
+        c.sort(function (a, b) {
+
+            const monthA = a.date.getMonth();
+            const dayA = a.date.getDate();
+            const monthB = b.date.getMonth();
+            const dayB = b.date.getDate();
+
+            if (monthA < monthB) {
+                return -1;
+            } else if (monthA > monthB) {
+                return 1;
+            } else {
+                if (dayA < dayB) {
+                    return -1;
+                } else if (dayA > dayB) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
+        });
+        return c;
+    };
 
     useEffect(() => {
+        const sortedCards = sortCardsByDate(cards.slice());
+        setVisibleCards(cards);
         const container = containerRef.current;
-        const cardCount = cards.length;
+        const cardCount = sortedCards.length;
         let startIndex = 0;
 
         const handleScroll = () => {
@@ -31,8 +58,8 @@ const CardList = () => {
                 if (scrollTop + containerHeight >= scrollHeight) {
                     startIndex = (startIndex + 1) % cardCount;
                     setVisibleCards([
-                        ...cards.slice(startIndex),
-                        ...cards.slice(0, startIndex),
+                        ...sortedCards.slice(startIndex),
+                        ...sortedCards.slice(0, startIndex),
                     ]);
                 }
             } else {
@@ -40,8 +67,8 @@ const CardList = () => {
                 if (scrollTop === 0) {
                     startIndex = (startIndex - 1 + cardCount) % cardCount;
                     setVisibleCards([
-                        ...cards.slice(startIndex),
-                        ...cards.slice(0, startIndex),
+                        ...sortedCards.slice(startIndex),
+                        ...sortedCards.slice(0, startIndex),
                     ]);
                     container.scrollTop =
                         container.scrollHeight - containerHeight;
@@ -55,11 +82,6 @@ const CardList = () => {
         return () => {
             container.removeEventListener("scroll", handleScroll);
         };
-    }, [cards]);
-
-    useEffect(() => {
-        // Initialize visible cards when the component mounts
-        setVisibleCards(cards);
     }, [cards]);
 
     return (
