@@ -1,7 +1,7 @@
 import BirthdayCard from "./components/BirthdayCard.js";
 import FormModal from "./components/FormModal.js";
 import { useRecoilValue } from "recoil";
-import { birthdaysState } from "./recoil/atom/bithdayAtom"
+import { birthdaysState } from "./recoil/atom/bithdayAtom";
 import { Row } from "antd";
 
 const App = () => {

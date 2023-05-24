@@ -1,4 +1,10 @@
-import { Button, Modal, Form, Input, Calendar, Upload } from "antd";
+import {
+    Button,
+    Modal,
+    Form,
+    Input,
+    Upload,
+} from "antd";
 import { useState } from "react";
 import { PlusOutlined } from "@ant-design/icons";
 import { useRecoilState } from "recoil";
@@ -7,6 +13,7 @@ import { v4 as uuid } from "uuid";
 import "./FormModal.css";
 //TODO: Remove when real photo exists
 import balloons from "../assets/balloons.jpg";
+import CustomCalendar from "./CustomCalendar";
 
 const FormModal = () => {
     const [birthdays, setBirthdays] = useRecoilState(birthdaysState);
@@ -129,13 +136,9 @@ const FormModal = () => {
                     </Form.Item>
 
                     <Form.Item label="Select date" name="date">
-                        <div className="datePicker">
-                            <Calendar
-                                fullscreen={false}
-                                mode="month"
-                                onSelect={(value) => setFormDate(value)}
-                            />
-                        </div>
+                        <CustomCalendar
+                            updateFormDate={(value) => setFormDate(value)}
+                        />
                     </Form.Item>
 
                     <Form.Item
