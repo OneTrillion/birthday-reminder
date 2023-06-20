@@ -8,7 +8,7 @@ import {
 import { useState } from "react";
 import { PlusOutlined } from "@ant-design/icons";
 import { useRecoilState } from "recoil";
-import { birthdaysState } from "../recoil/atom/bithdayAtom";
+import { birthdaysState } from "../recoil/atom/birthdayAtom";
 import { v4 as uuid } from "uuid";
 import "./FormModal.css";
 //TODO: Remove when real photo exists
